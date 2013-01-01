@@ -1,0 +1,6 @@
+/.settings
+.project
+.pydevproject
+/media
+*.pyc
+*.mo
