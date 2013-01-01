@@ -1,5 +1,14 @@
 <div id="rocaptcha_div"></div>
 <script type="text/javascript" src="http://{{api_server}}/rocaptcha/api/js?key={{public_key}}{{error_param}}"></script>
-{% include "rocaptcha/options.html" %}
+<script type="text/javascript">
+try {
+	var RoCaptchaOptions = {{options}};
+	
+	var rocaptcha = new RoCaptcha("rocaptcha_div");
+	rocaptcha.init();
+} catch (e) {
+	alert("RoCaptchu se nepodařilo načíst. Zřejmě je problém s připojením k serveru.");
+}
+</script>
 
 
