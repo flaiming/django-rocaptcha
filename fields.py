@@ -26,9 +26,9 @@ class RoCaptchaField(forms.CharField):
         https://code.google.com/apis/recaptcha/docs/customization.html
         """
         public_key = public_key if public_key else settings.\
-                RECAPTCHA_PUBLIC_KEY
+                ROCAPTCHA_PUBLIC_KEY
         self.private_key = private_key if private_key else \
-                settings.RECAPTCHA_PRIVATE_KEY
+                settings.ROCAPTCHA_PRIVATE_KEY
 
         self.widget = RoCaptcha(public_key=public_key, attrs=attrs)
         self.required = False
@@ -51,7 +51,7 @@ class RoCaptchaField(forms.CharField):
         hash = smart_unicode(values['hash'])
         angle = smart_unicode(values['angle'])
 
-#        if os.environ.get('RECAPTCHA_TESTING', None) == 'True' and \
+#        if os.environ.get('ROCAPTCHA_TESTING', None) == 'True' and \
 #                angle == 'PASSED':
 #            return values[0]
 
