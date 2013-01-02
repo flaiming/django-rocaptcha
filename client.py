@@ -8,8 +8,8 @@ from django.utils import simplejson as json
 from django.utils.safestring import mark_safe
 from django.core.handlers.wsgi import STATUS_CODE_TEXT
 
-DEFAULT_API_SERVER = "127.0.0.1:8001"
-DEFAULT_VERIFY_SERVER = "127.0.0.1:8001"
+DEFAULT_API_SERVER = "rocaptcha.com"
+DEFAULT_VERIFY_SERVER = "rocaptcha.com"
 DEFAULT_WIDGET_TEMPLATE = 'rocaptcha/widget.html'
 
 API_SERVER = getattr(settings, "CAPTCHA_API_SERVER", DEFAULT_API_SERVER)
