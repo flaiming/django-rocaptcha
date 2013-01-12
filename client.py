@@ -5,6 +5,7 @@ import sys
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import simplejson as json
+from django.utils import translation
 from django.utils.safestring import mark_safe
 from django.core.handlers.wsgi import STATUS_CODE_TEXT
 
@@ -47,9 +48,12 @@ def displayhtml(public_key,
     use_ssl -- Should the request be sent over ssl?
     error -- An error message to display (from RecaptchaResponse.error_code)"""
     #import pdb; pdb.set_trace()
-    error_param = ''
+    params = ''
     if error:
-        error_param = '&error=%s' % error
+        params = '&error=%s' % error
+        
+    #set language param
+    params += '&lang=%s' % translation.get_language()
 
     server = API_SERVER
 
@@ -59,7 +63,7 @@ def displayhtml(public_key,
     return render_to_string(WIDGET_TEMPLATE,
             {'api_server': server,
              'public_key': public_key,
-             'error_param': error_param,
+             'params': params,
              'options': mark_safe(json.dumps(attrs, indent=2))
              })
 
@@ -97,7 +101,7 @@ def submit(hash,
             #'response':  encode_if_necessary(angle),
             })
     
-    verify_url = 'http://%s/rocaptcha/api/verify/%s/%s/' % (VERIFY_SERVER, encode_if_necessary(hash), encode_if_necessary(angle))
+    verify_url = 'http://%s/api/verify/%s/%s/' % (VERIFY_SERVER, encode_if_necessary(hash), encode_if_necessary(angle))
 
     try:
         request = urllib2.Request(
