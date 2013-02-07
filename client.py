@@ -102,15 +102,15 @@ def submit(hash,
             })
     
     verify_url = 'http://%s/api/verify/%s/%s/' % (VERIFY_SERVER, encode_if_necessary(hash), encode_if_necessary(angle))
-
+    
     try:
         request = urllib2.Request(
             url=verify_url,
             data=params,
-    #        headers={
-    #            "Content-type": "application/x-www-form-urlencoded",
-    #            "User-agent": "RoCAPTCHA Python"
-    #            }
+            headers={
+                "Content-type": "application/x-www-form-urlencoded",
+                "User-agent": "RoCAPTCHA Python"
+                }
             )
     
         httpresp = urllib2.urlopen(request)

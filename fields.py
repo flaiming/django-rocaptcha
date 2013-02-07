@@ -25,14 +25,14 @@ class RoCaptchaField(forms.CharField):
         JavaScript variables as specified in
         https://code.google.com/apis/recaptcha/docs/customization.html
         """
-        public_key = public_key if public_key else settings.\
-                ROCAPTCHA_PUBLIC_KEY
-        self.private_key = private_key if private_key else \
-                settings.ROCAPTCHA_PRIVATE_KEY
+        public_key = public_key if public_key else settings.ROCAPTCHA_PUBLIC_KEY
+        self.private_key = private_key if private_key else settings.ROCAPTCHA_PRIVATE_KEY
 
         self.widget = RoCaptcha(public_key=public_key, attrs=attrs)
         self.required = False
+        
         super(RoCaptchaField, self).__init__(*args, **kwargs)
+        self.label = "RoCAPTCHA"
 
     def get_remote_ip(self):
         f = sys._getframe()
