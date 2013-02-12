@@ -98,10 +98,10 @@ def submit(hash,
             'key': private_key,
             #'remoteip':  encode_if_necessary(remoteip),
             #'challenge':  encode_if_necessary(hash),
-            #'response':  encode_if_necessary(angle),
+            'response':  encode_if_necessary(angle),
             })
     
-    verify_url = 'http://%s/api/verify/%s/%s/' % (VERIFY_SERVER, encode_if_necessary(hash), encode_if_necessary(angle))
+    verify_url = 'http://%s/api/verify/%s/' % (VERIFY_SERVER, encode_if_necessary(hash))
     
     try:
         request = urllib2.Request(
