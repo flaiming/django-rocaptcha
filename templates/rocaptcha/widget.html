@@ -1,15 +1,12 @@
 {% load i18n %}
 <div id="rocaptcha_div"></div>
-<script type="text/javascript" src="http://{{api_server}}/api/js?key={{public_key}}{{params}}"></script>
+<script type="text/javascript" src="http://{{api_server}}/api/js/?key={{public_key}}{{params}}"></script>
 <script type="text/javascript">
-try {
+
 	var RoCaptchaOptions = {{options}};
 	
-	var rocaptcha = new RoCaptcha("rocaptcha_div");
-	rocaptcha.init();
-} catch (e) {
-	alert("{%trans "RoCAPTCHA cannot be loaded. Problem with connection to server."%}");
-}
+	RoCaptcha.init("rocaptcha_div");
+
 </script>
 
 
