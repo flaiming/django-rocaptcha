@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-15 20:43+0100\n"
+"POT-Creation-Date: 2013-04-02 11:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
-#: fields.py:16
-msgid "Incorrect, please try again."
+#: client.py:36
+#, fuzzy
+msgid "Image was not positioned upright, please try again."
 msgstr "Špatně otočený obrázek, zkuste znovu."
 
-#: fields.py:17
-msgid "Bad private key!"
-msgstr "Špatný privátný API klíč!"
+#: client.py:37
+msgid "You have submitted bad private key."
+msgstr "Odeslali jste špatný privátní klíč."
 
-#: templates/rocaptcha/widget.html:11
-msgid "RoCAPTCHA cannot be loaded. Problem with connection to server."
-msgstr ""
-"RoCaptchu se nepodařilo načíst. Zřejmě je problém s připojením k serveru."
+#: client.py:38
+msgid "Timeout for solving test has passed. Please try again."
+msgstr "Čas vyhrazený pro splnění testu byl překročen. Zkuste to prosím znovu."
+
+#: client.py:39
+msgid "Response value is not present or is in wrong format."
+msgstr "Nebyla odeslána hodnota odpovědi nebo je ve špatném formátu."
+
+#: client.py:40
+msgid "You have submitted bad image hash code."
+msgstr "Byl odeslán špatný hash kód obrázku."
+
+#: client.py:41
+#, fuzzy
+msgid "Unknown error, please try again later."
+msgstr "Špatně otočený obrázek, zkuste znovu."
+
+#~ msgid "Bad private key!"
+#~ msgstr "Špatný privátný API klíč!"
+
+#~ msgid "RoCAPTCHA cannot be loaded. Problem with connection to server."
+#~ msgstr ""
+#~ "RoCaptchu se nepodařilo načíst. Zřejmě je problém s připojením k serveru."

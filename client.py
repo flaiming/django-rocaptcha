@@ -1,5 +1,6 @@
 import urllib
 import urllib2
+import socket
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -99,6 +100,9 @@ def submit(hash,
         if isinstance(s, unicode):
             return s.encode('utf-8')
         return s
+        
+    timeout = 5
+    socket.setdefaulttimeout(timeout)
 
     params = urllib.urlencode({
             'key': encode_if_necessary(private_key),
@@ -115,7 +119,10 @@ def submit(hash,
             data=params,
             headers={
                 "Content-type": "application/x-www-form-urlencoded",
-                "User-agent": "RoCAPTCHA Python"
+                "User-agent": "RoCAPTCHA/Python",
+                "Host" : VERIFY_SERVER,
+                "Accept-Charset" : "UTF-8",
+                "Accept" : "application/json",
                 }
             )
         httpresp = urllib2.urlopen(request)
