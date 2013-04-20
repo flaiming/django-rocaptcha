@@ -1,6 +1,6 @@
 Django RoCAPTCHA
 ================
-**Django form widget for [RoCAPTCHA](http://rocaptcha.com) test.**
+**Django form widget for `RoCAPTCHA <http://rocaptcha.com>`_ test.**
 
 .. contents:: Contents
     :depth: 5
@@ -46,4 +46,4 @@ To allow for runtime specification of keys you can optionally pass ``private_key
 
 Credits
 -------
-Inspired by [Django reCAPTCHA widget](https://github.com/praekelt/django-recaptcha/).
+Inspired by `Django reCAPTCHA widget <https://github.com/praekelt/django-recaptcha/>`_.
