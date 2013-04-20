@@ -1,9 +1,11 @@
 Django RoCAPTCHA
 ================
-**Django form widget for `RoCAPTCHA <http://rocaptcha.com>`_ test.**
+**Django form widget for RoCAPTCHA test.**
 
 .. contents:: Contents
     :depth: 5
+
+`RoCAPTCHA web site <http://rocaptcha.com>`_
 
 Installation
 ------------
