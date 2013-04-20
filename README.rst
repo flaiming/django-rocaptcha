@@ -46,4 +46,4 @@ To allow for runtime specification of keys you can optionally pass ``private_key
 
 Credits
 -------
-Inspired by Django reCAPTCHA widget - <https://github.com/praekelt/django-recaptcha/>`_ .
+Inspired by [Django reCAPTCHA widget](https://github.com/praekelt/django-recaptcha/).
