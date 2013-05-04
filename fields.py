@@ -36,9 +36,10 @@ class RoCaptchaField(forms.CharField):
     def clean(self, values):
         hash = smart_unicode(values['hash'])
         angle = smart_unicode(values['angle'])
+        session_id = smart_unicode(values['session_id'])
 
         check_captcha = client.submit(hash, \
-                angle, private_key=self.private_key, \
+                angle, session_id, private_key=self.private_key, \
                 remoteip=self.get_remote_ip())
         if not check_captcha.is_valid:
             msg = Status.get_message(check_captcha.error_code)

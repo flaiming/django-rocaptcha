@@ -8,6 +8,8 @@ from django.utils import simplejson as json
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
+from rocaptcha.middleware import get_session_key
+
 DEFAULT_API_SERVER = "rocaptcha.com"
 DEFAULT_VERIFY_SERVER = "rocaptcha.com"
 DEFAULT_WIDGET_TEMPLATE = 'rocaptcha/widget.html'
@@ -32,6 +34,7 @@ class Status:
     TIMEOUT = "TIMEOUT"
     WRONG_RESPONSE = "WRONG_RESPONSE"
     WRONG_HASH = "WRONG_HASH"
+    WRONG_SESSION = "WRONG_SESSION"
     
     MESSAGES = {
         FAILED: _(u'Image was not positioned upright, please try again.'),
@@ -39,6 +42,7 @@ class Status:
         TIMEOUT: _(u'Timeout for solving test has passed. Please try again.'),
         WRONG_RESPONSE: _(u'Response value is not present or is in wrong format.'),
         WRONG_HASH: _(u'You have submitted bad image hash code.'),
+        WRONG_SESSION: _(u'You have not submitted session data.'),
         ERROR: _(u'Unknown error, please try again later.'),
     }
     
@@ -72,6 +76,7 @@ def displayhtml(public_key):
 
 def submit(hash,
     angle,
+    session_id,
     private_key,
     remoteip):
     """
@@ -95,12 +100,18 @@ def submit(hash,
             is_valid=False,
             error_code=Status.WRONG_RESPONSE
         )
+    
+    if not (session_id and len(session_id)):
+        return RoCaptchaResponse(
+            is_valid=False,
+            error_code=Status.WRONG_SESSION
+        )
 
     def encode_if_necessary(s):
         if isinstance(s, unicode):
             return s.encode('utf-8')
         return s
-        
+    
     timeout = 5
     socket.setdefaulttimeout(timeout)
 
@@ -123,6 +134,7 @@ def submit(hash,
                 "Host" : VERIFY_SERVER,
                 "Accept-Charset" : "UTF-8",
                 "Accept" : "application/json",
+                "Cookie": "sessionid=" + encode_if_necessary(session_id)
                 }
             )
         httpresp = urllib2.urlopen(request)
