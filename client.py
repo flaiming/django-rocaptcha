@@ -8,8 +8,6 @@ from django.utils import simplejson as json
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
-from rocaptcha.middleware import get_session_key
-
 DEFAULT_API_SERVER = "rocaptcha.com"
 DEFAULT_VERIFY_SERVER = "rocaptcha.com"
 DEFAULT_WIDGET_TEMPLATE = 'rocaptcha/widget.html'
