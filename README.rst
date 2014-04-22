@@ -10,7 +10,7 @@ Django RoCAPTCHA
 Installation
 ------------
 
-#. Install or add ``django-rocaptcha`` to your Python path.
+#. Run ``python setup.py install`` to install rocaptcha module.
 
 #. Add ``rocaptcha`` to your ``INSTALLED_APPS`` setting.
 
