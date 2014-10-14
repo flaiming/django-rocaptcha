@@ -1,10 +1,10 @@
 import urllib
 import urllib2
 import socket
+import json
 
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils import simplejson as json
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
@@ -33,7 +33,7 @@ class Status:
     WRONG_RESPONSE = "WRONG_RESPONSE"
     WRONG_HASH = "WRONG_HASH"
     WRONG_SESSION = "WRONG_SESSION"
-    
+
     MESSAGES = {
         FAILED: _(u'Image was not positioned upright, please try again.'),
         BAD_PRIVATE_KEY: _(u'You have submitted bad private key.'),
@@ -43,7 +43,7 @@ class Status:
         WRONG_SESSION: _(u'You have not submitted session data.'),
         ERROR: _(u'Unknown error, please try again later.'),
     }
-    
+
     @classmethod
     def get_message(cls, status):
         try:
@@ -59,7 +59,7 @@ class RoCaptchaResponse(object):
 
 def displayhtml(public_key):
     """Gets the HTML to display for RoCATPCHA
-    
+
     public_key -- The public api key"""
     params = ''
     #sets language code
@@ -92,13 +92,13 @@ def submit(hash,
             is_valid=False,
             error_code=Status.WRONG_HASH
         )
-    
+
     if not (angle and len(angle)):
         return RoCaptchaResponse(
             is_valid=False,
             error_code=Status.WRONG_RESPONSE
         )
-    
+
     if not (session_id and len(session_id)):
         return RoCaptchaResponse(
             is_valid=False,
@@ -109,7 +109,7 @@ def submit(hash,
         if isinstance(s, unicode):
             return s.encode('utf-8')
         return s
-    
+
     timeout = 5
     socket.setdefaulttimeout(timeout)
 
@@ -119,9 +119,9 @@ def submit(hash,
             'remoteip':  encode_if_necessary(remoteip),
             'response':  encode_if_necessary(angle),
             })
-    
+
     verify_url = 'http://%s/api/verify/' % VERIFY_SERVER
-    
+
     try:
         request = urllib2.Request(
             url=verify_url,
@@ -140,9 +140,9 @@ def submit(hash,
         httpresp.close()
     except Exception as e:
         return_values = False
-    
+
     #check if request was successfull
-    if (return_values == False):
+    if (return_values is False):
         return RoCaptchaResponse(is_valid=False, error_code=Status.ERROR)
 
     #get status value
