@@ -4,6 +4,7 @@ from client import Status
 from django import forms
 from django.conf import settings
 from django.utils.encoding import smart_unicode
+from django.core.exceptions import ValidationError
 
 from rocaptcha import client
 from rocaptcha.widgets import RoCaptcha
@@ -17,7 +18,7 @@ class RoCaptchaField(forms.CharField):
 
         self.widget = RoCaptcha(public_key=public_key)
         self.required = False
-        
+
         super(RoCaptchaField, self).__init__(*args, **kwargs)
         self.label = "RoCAPTCHA"
 
@@ -43,5 +44,5 @@ class RoCaptchaField(forms.CharField):
                 remoteip=self.get_remote_ip())
         if not check_captcha.is_valid:
             msg = Status.get_message(check_captcha.error_code)
-            raise forms.util.ValidationError(msg)
+            raise ValidationError(msg)
         return hash
