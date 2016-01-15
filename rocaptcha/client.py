@@ -120,7 +120,8 @@ def submit(hash,
             'response':  encode_if_necessary(angle),
             })
 
-    verify_url = 'http://%s/api/verify/' % VERIFY_SERVER
+    verify_url = 'https://%s/api/verify/' % VERIFY_SERVER
+
 
     try:
         request = urllib2.Request(
